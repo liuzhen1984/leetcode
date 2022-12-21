@@ -1,5 +1,6 @@
-package one.two_sum
+package first.two_sum
 
+import scala.collection.mutable
 import scala.io.StdIn
 
 /**
@@ -32,11 +33,11 @@ object TwoSum {
       printf("Please input your target number: ")
       try {
         val x: Int = StdIn.readInt().toInt
-        val (first, second) = findTarget(0, x, list)
-        if (first < 0 || second < 0) {
+        val result:List[Int] = getIndex( x, list)
+        if (list(0) < 0 || list(1) < 0) {
           println("They aren't in the list ")
         } else {
-          println(s"index = ($first,$second), value = ${list(first)},${list(second)} ")
+          println(s"index = (${result(0)},${result(1)}), value = ${list(result(0))},${list(result(1))} ")
         }
       }catch {
         case _ => println(s"You input value is wrong format, please input a numerical")
@@ -44,14 +45,32 @@ object TwoSum {
     }
   }
 
+  //map O(n) 时间复杂度
+  def getIndexByMap(target:Int,list:List[Int]):List[Int] = {
+    val map:mutable.Map[Int,Int] = mutable.Map()
 
-  def findTarget(firstIndex: Int, target: Int, list: List[Int]): (Int, Int) = {
-    if (firstIndex >= list.length) {
-      return (-1, -1)
+    val idx = 0;
+    for( i <- 0 until(list.length)){
+      if(map.contains(target-list(i))){
+        return List(map.get(target-list(i)).get,i)
+      }
+      map(list(i)) = i
     }
-    for (i <- 0 to list.length - 1) {
+    Nil
+  }
+
+  //递归方法 O(n*n) n平方的时间复杂度
+  def getIndex(target:Int,list:List[Int]):List[Int] = {
+    return findTarget(0,target, list)
+  }
+
+  def findTarget(firstIndex: Int, target: Int, list: List[Int]): List[Int] = {
+    if (firstIndex >= list.length) {
+      return Nil
+    }
+    for (i <- 0 until  list.length ) {
       if (i != firstIndex && list(i) < target && (list(i) + list(firstIndex)) == target) {
-        return (firstIndex, i)
+        return List(firstIndex, i)
       }
     }
     findTarget(firstIndex + 1, target, list)
