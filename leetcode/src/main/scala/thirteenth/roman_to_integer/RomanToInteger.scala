@@ -2,28 +2,33 @@ package thirteenth.roman_to_integer
 
 object RomanToInteger extends App {
 
+  println(getInteger("MMMCMXCIX"))
+  println(getInteger("MDCCC"))
 
-  def getInteger(num: String): Int = {
-//    if(num<1 || num>3999){
-//      return ""
-//    }
-//    var tmp: Int = num
-//    var index = 1
-//    val result = mutable.ArrayBuffer[String]()
-//    while (tmp > 0) {
-//      val value = tmp % 10
-//      value match {
-//        case 9 => result.insert(0, (RomanChart.getChart(index) + RomanChart.getChart(index * 10)))
-//        case x if x < 9 && x > 5 => result.insert(0,(RomanChart.getChart(5 * index) + (RomanChart.getChart(index) * (value - 5))))
-//        case 5 => result.insert(0,RomanChart.getChart(value * index))
-//        case 4 => result.insert(0,(RomanChart.getChart(index) + RomanChart.getChart(5 * index)) )
-//        case _ => result.insert(0,RomanChart.getChart(index) * value)
-//      }
-//      tmp = tmp / 10
-//      index = index * 10
-//    }
-//    result.mkString("")
-    0
+  def getInteger(roman: String): Int = {
+    if (roman < "I" || roman > "MMMCMXCIX") {
+      return 0
+    }
+    var num = 0
+    var tmp = 0
+    for (r <- roman) {
+      if (tmp == 0) {
+        tmp = RomanChart.getNumber(r.toString)
+      } else {
+        if (tmp < RomanChart.getNumber(r.toString)) {
+          num += (RomanChart.getNumber(r.toString) - tmp)
+          tmp = 0
+        } else {
+          num += tmp
+          tmp = RomanChart.getNumber(r.toString)
+        }
+
+      }
+    }
+    if (tmp > 0) {
+      num += tmp
+    }
+    num
   }
 
 
@@ -58,6 +63,19 @@ object RomanChart extends Enumeration {
       case 500 => "D"
       case 1000 => "M"
       case _ => "Y"
+    }
+  }
+
+  def getNumber(roman: String): Int = {
+    roman match {
+      case "I" => 1
+      case "V" => 5
+      case "X" => 10
+      case "L" => 50
+      case "C" => 100
+      case "D" => 500
+      case "M" => 1000
+      case _ => 0
     }
   }
 }
