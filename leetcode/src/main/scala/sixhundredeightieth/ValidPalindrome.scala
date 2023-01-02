@@ -74,35 +74,24 @@ object ValidPalindrome extends App {
     true
   }
 
-  def validPalindromeOnlyString(str: String): Boolean = {
-    var start = 0
-    var end = str.length - 1
-    var tmpIndex:(Int,Int)=(0,end)
-    var useTemp = false
-    var isEnd = false
-    while (start < end) {
-      if (str(start) != str(end)) {
-        if (isEnd) {
-          return false
-        }
-        if (start + 1 > end || start > end - 1) {
-          return false
-        }
-        if (!useTemp) {
-          tmpIndex = (start, end)
-          start += 1
-          useTemp = true
+  def validPalindromeOnlyString(s: String): Boolean = {
+    var removed = 0
+    def isPalindrome(left: Int, right: Int): Boolean = {
+      if (right > left) {
+        if (s(left) == s(right)) {
+          isPalindrome(left + 1, right - 1)
         } else {
-          start = tmpIndex._1
-          end = tmpIndex._2 - 1
-          isEnd = true
+          if (removed > 0) {
+            false
+          } else {
+            removed += 1
+            isPalindrome(left + 1, right) || isPalindrome(left, right - 1)
+          }
         }
-
       } else {
-        start += 1
-        end -= 1
+        true
       }
     }
-    true
+    isPalindrome(0, s.size - 1)
   }
 }
