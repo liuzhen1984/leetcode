@@ -10,6 +10,7 @@ class ValidPalindromeTest extends AnyFunSpec{
       assert(ValidPalindrome.isPalindrome("0"))
       assert(!ValidPalindrome.isPalindrome("0p"))
       assert(!ValidPalindrome.isPalindrome("race a car"))
+      assert(ValidPalindrome.validPalindrome(" amanapl anacana lPanaama"))
       assert(ValidPalindrome.validPalindrome("amanaplanacanalpanaama"))
 
     }

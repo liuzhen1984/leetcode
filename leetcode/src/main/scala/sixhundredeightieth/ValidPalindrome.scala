@@ -37,7 +37,7 @@ object ValidPalindrome extends App {
   def validPalindrome(str: String): Boolean = {
     var start = 0
     var end = str.length - 1
-    var tmpIndex:(Int,Int)=(0,end)
+    var tmpIndex: (Int, Int) = (0, end)
     var useTemp = false
     var isEnd = false
     while (start < end) {
@@ -51,16 +51,16 @@ object ValidPalindrome extends App {
             if (isEnd) {
               return false
             }
-            if(start+1>end || start>end-1){
+            if (start + 1 > end || start > end - 1) {
               return false
             }
-            if(!useTemp){
+            if (!useTemp) {
               tmpIndex = (start, end)
               start += 1
-              useTemp=true
-            }else{
+              useTemp = true
+            } else {
               start = tmpIndex._1
-              end = tmpIndex._2-1
+              end = tmpIndex._2 - 1
               isEnd = true
             }
 
@@ -69,6 +69,38 @@ object ValidPalindrome extends App {
             end -= 1
           }
         }
+      }
+    }
+    true
+  }
+
+  def validPalindromeOnlyString(str: String): Boolean = {
+    var start = 0
+    var end = str.length - 1
+    var tmpIndex:(Int,Int)=(0,end)
+    var useTemp = false
+    var isEnd = false
+    while (start < end) {
+      if (str(start) != str(end)) {
+        if (isEnd) {
+          return false
+        }
+        if (start + 1 > end || start > end - 1) {
+          return false
+        }
+        if (!useTemp) {
+          tmpIndex = (start, end)
+          start += 1
+          useTemp = true
+        } else {
+          start = tmpIndex._1
+          end = tmpIndex._2 - 1
+          isEnd = true
+        }
+
+      } else {
+        start += 1
+        end -= 1
       }
     }
     true
