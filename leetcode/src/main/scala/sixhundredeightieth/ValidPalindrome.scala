@@ -7,21 +7,70 @@ object ValidPalindrome extends App {
   println(isPalindrome("race a car"))
   println(isPalindrome("A man, a plan, a canal: Panama"))
   println(isPalindrome("A man, a plan, a canl: Panma"))
-  def isPalindrome(str:String):Boolean={
-    if(str.length==1){
-      return true
-    }
-    if(str.length==2){
-      return str(0)==str(1)
-    }
-    for(i<-1 until str.length-1){
-      if((str(i+1)>='a' && str(i+1)<='z') || (str(i+1)>='A' && str(i+1)<='Z') || (str(i+1)>='0' && str(i+1)<='9')){
-        if (str(i) == str(i + 1) || str(i - 1) == str(i + 1)) {
-          return true
+
+  def isPalindrome(str: String): Boolean = {
+    var start = 0
+    var end = str.length - 1
+    while (start < end) {
+      if (!isChar(str(start))) {
+        start += 1
+      } else {
+        if (!isChar(str(end))) {
+          end -= 1
+        } else {
+          if (str(start).toLower != str(end).toLower) {
+            return false
+          } else {
+            start += 1
+            end -= 1
+          }
         }
       }
-
     }
-    false
+    true
+  }
+
+  def isChar(c: Char): Boolean = {
+    (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
+  }
+
+  def validPalindrome(str: String): Boolean = {
+    var start = 0
+    var end = str.length - 1
+    var tmpIndex:(Int,Int)=(0,end)
+    var useTemp = false
+    var isEnd = false
+    while (start < end) {
+      if (!isChar(str(start))) {
+        start += 1
+      } else {
+        if (!isChar(str(end))) {
+          end -= 1
+        } else {
+          if (str(start).toLower != str(end).toLower) {
+            if (isEnd) {
+              return false
+            }
+            if(start+1>end || start>end-1){
+              return false
+            }
+            if(!useTemp){
+              tmpIndex = (start, end)
+              start += 1
+              useTemp=true
+            }else{
+              start = tmpIndex._1
+              end = tmpIndex._2-1
+              isEnd = true
+            }
+
+          } else {
+            start += 1
+            end -= 1
+          }
+        }
+      }
+    }
+    true
   }
 }
