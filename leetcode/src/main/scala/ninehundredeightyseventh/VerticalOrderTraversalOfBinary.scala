@@ -11,7 +11,7 @@ object VerticalOrderTraversalOfBinary extends App {
 
   case class Node(value: Int, left: Int, right: Int, isLeft: Boolean)
 
-  case class TreeNode(value:Int=0,left:TreeNode=_,right:TreeNode=_)
+  case class TreeNode(value:Int=0,left:TreeNode,right:TreeNode)
   def verticalTraversal(root: TreeNode): List[List[Int]] = {
     val map = mutable.Map[Int, ListBuffer[(Int,Int)]]()
 
