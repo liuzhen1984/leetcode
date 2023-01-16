@@ -62,10 +62,10 @@ object Solution {
     }
     var result = false
     if (root.left != null) {
-      result = deepNode(root.left, find, list)
+      result = deepNode2(root.left, find, list)
     }
     if (!result && root.right != null) {
-      result = deepNode(root.right, find, list)
+      result = deepNode2(root.right, find, list)
     }
     if (!result) {
       list.remove(list.length - 1)
