@@ -112,3 +112,52 @@ func isInBoard(board [][]int, x, y int) bool {
 	return x >= 0 && x < len(board) && y >= 0 && y < len(board[0])
 }
 ```
+
+
+```aidl
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        MAX_ROW = len(grid) - 1
+        MAX_COL = len(grid[0]) - 1
+
+        if not grid or not grid[0]:
+            return -1
+        if grid[0][0] == 1 or grid[MAX_ROW][MAX_COL] == 1:
+            return -1
+
+        queue = [[[0, 0]]]
+        steps = 1
+
+        def helper(x, y):
+            next_level = []
+            for i in (x - 1, x, x + 1):
+                for j in (y - 1, y, y + 1):
+                    if i == x and j == y:
+                        continue
+                    elif i < 0 or i > MAX_ROW or j < 0 or j > MAX_COL:
+                        continue
+                    elif grid[i][j] == 0:
+                        next_level.append([i, j])
+            return next_level
+
+        while queue:
+            curr_level = queue.pop(0)
+            new_level = []
+            for pair in curr_level:
+                if pair == [MAX_ROW, MAX_COL]:
+                    return steps
+                else:
+                    x = pair[0]
+                    y = pair[1]
+                    if grid[x][y] != 2:
+                        grid[x][y] = 2
+                        next_level = helper(x, y)
+                        for l in next_level:
+                            new_level.append(l)
+            if new_level:
+                queue.append(new_level)
+            steps += 1
+
+        return -1
+```
+```
