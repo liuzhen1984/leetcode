@@ -857,6 +857,7 @@ class Solution:
 
 **1091. Shortest Path in Binary Matrix (T = n, S = n)**
 
+###### by zliu, This algorithm needs to be relearned, My algorithm is so slow
 ```python
 class Solution:
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
@@ -927,6 +928,7 @@ class Solution:
 
 **523. Continuous Subarray Sum**
 
+###### by zliu, This algorithm needs to be relearned
 ```python
 class Solution:
     def checkSubarraySum(self, nums: List[int], k: int) -> bool:
