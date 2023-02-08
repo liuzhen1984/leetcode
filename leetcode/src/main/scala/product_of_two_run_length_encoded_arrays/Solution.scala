@@ -15,7 +15,7 @@ object Solution extends App {
   def findRLEArray(encoded1: Array[Array[Int]], encoded2: Array[Array[Int]]): List[List[Int]] = {
     var e1 = 0
     var e2 = 0
-    val resultList = mutable.ListBuffer[List[Int]]()
+    var resultList = mutable.ListBuffer[List[Int]]()
     while (e1 < encoded1.length) {
       val len = Math.min(encoded1(e1)(1), encoded2(e2)(1))
       val mut = encoded1(e1)(0) * encoded2(e2)(0)
