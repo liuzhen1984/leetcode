@@ -1,6 +1,8 @@
 ###  Product of Two Run-Length Encoded Arrays
 https://leetcode.com/problems/Product-of-Two-Run-Length-Encoded-Arrays/
 
+#zliu need to optimize the algorithm, solve the timeout execution
+
 Run-length encoding is a compression algorithm that allows for an integer array nums with many segments of consecutive repeated numbers to be represented by a (generally smaller) 2D array encoded. Each encoded[i] = [vali, freqi] describes the ith segment of repeated numbers in nums where vali is the value that is repeated freqi times.
 
 For example, nums = [1,1,1,2,2,2,2,2] is represented by the run-length encoded array encoded = [[1,3],[2,5]]. Another way to read this is "three 1's followed by five 2's".
