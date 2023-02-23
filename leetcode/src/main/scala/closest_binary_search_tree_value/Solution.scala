@@ -1,5 +1,4 @@
 package closest_binary_search_tree_value
-*
 
 class TreeNode(_value: Int = 0, _left: TreeNode = null, _right: TreeNode = null) {
   var value: Int = _value
