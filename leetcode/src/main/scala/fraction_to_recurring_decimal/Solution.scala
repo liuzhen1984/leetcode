@@ -3,47 +3,52 @@ package fraction_to_recurring_decimal
 import scala.collection.mutable
 
 object Solution extends App {
-    println(fractionToDecimal(1, 2))
-    println(fractionToDecimal(2, 1))
-//    println(fractionToDecimal(4, 333))
-    println(fractionToDecimal(10, 3))
-    println(fractionToDecimal(10, 9))
+  //  println(fractionToDecimal(1, 2))
+  //  println(fractionToDecimal(2, 1))
+  //  println(fractionToDecimal(4, 333))
+  //  println(fractionToDecimal(10, 3))
+  //  println(fractionToDecimal(10, 9))
   //  println(fractionToDecimal(1, 6))
-//  println(fractionToDecimal(1, 19))
+  //  println(fractionToDecimal(1, 19))
   //  println(fractionToDecimal(1, 17))
+//  println(fractionToDecimal(-1, -2147483648))
+//  println(fractionToDecimal(-2147483648, -1))
+  println(fractionToDecimal(-2147483648, 1))
 
 
   def fractionToDecimal(numerator: Int, denominator: Int): String = {
     var sign = ""
-    if (numerator * denominator < 0) {
+
+    var s =
+    println( numerator.toLong * denominator.toLong )
+    if (numerator.toLong * denominator.toLong < 0) {
       sign = "-"
     }
 
-    var formatString = "%.10f"
 
-    var result = formatString.format(BigDecimal(Math.abs(numerator.toDouble))/BigDecimal(Math.abs(denominator).toDouble)).split("\\.")
+    var n: Long = Math.abs(numerator.toLong / denominator.toLong)
+    println( n )
 
-    if (result.length==1 || result(1) == "0") {
-      return result(0)
+    var remainder: Long = Math.abs(numerator % denominator)
+
+    if (remainder == 0) {
+      return sign+n.toString
     }
-    println(s"$numerator,$denominator,${result(0)},${result(1)}")
+    //        println(s"$numerator,$denominator,$n,$remainder")
 
-    val res = mutable.ListBuffer(sign + result(0), ".")
-    val tmp = mutable.Map[String, Int]()
-    var remainder = result(1)
-    while (remainder.toLong > 0 && !tmp.contains(result(1))) {
-      tmp.put(result(1), res.length)
-      result = formatString.format(BigDecimal(result(1).toDouble * 10)/ BigDecimal(Math.abs(denominator))).split("\\.")
-      res.append(result(0))
-      if(result.length==1){
-        remainder = "-1"
-      }else{
-        remainder = result(1)
-      }
+    val res = mutable.ListBuffer(sign + n, ".")
+    val tmp = mutable.Map[Long, Int]()
+    while (remainder > 0 && !tmp.contains(remainder)) {
+      tmp.put(remainder, res.length)
+      n = Math.abs(remainder * 10 / denominator)
+      remainder = Math.abs(remainder * 10 % denominator)
+      //      println(s"$numerator,$denominator,$n,$remainder")
+
+      res.append(n.toString)
     }
-    if(tmp.contains(remainder)){
+    if (tmp.contains(remainder)) {
       val idx = tmp.get(remainder).get
-      res.insert(idx,"(")
+      res.insert(idx, "(")
       res.append(")")
     }
     res.mkString("")
