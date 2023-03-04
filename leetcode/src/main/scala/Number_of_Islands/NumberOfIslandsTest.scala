@@ -1,4 +1,4 @@
-package twohundreds
+package Number_of_Islands
 
 import org.scalatest.funspec.AnyFunSpec
 

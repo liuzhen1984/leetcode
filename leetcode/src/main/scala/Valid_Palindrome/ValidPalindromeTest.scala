@@ -1,4 +1,4 @@
-package sixhundredeightieth
+package Valid_Palindrome
 
 import org.scalatest.funspec.AnyFunSpec
 

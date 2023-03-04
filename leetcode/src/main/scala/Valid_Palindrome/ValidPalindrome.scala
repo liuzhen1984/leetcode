@@ -1,4 +1,4 @@
-package sixhundredeightieth
+package Valid_Palindrome
 
 object ValidPalindrome extends App {
   println(isPalindrome("abccde"))
